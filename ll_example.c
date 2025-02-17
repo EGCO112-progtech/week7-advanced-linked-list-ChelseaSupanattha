@@ -2,6 +2,7 @@
 // Inserting and deleting nodes in a list
 #include <stdio.h>
 #include <stdlib.h>
+#include "ll.h"
 
 int main( void )
 { 
@@ -11,7 +12,7 @@ int main( void )
 
    instructions(); // display the menu
    printf( "%s", "? " );
-   scanf( "%u", &choice );
+   scanf( "%u", &choice ); //unsigned int
 
    // loop while user does not choose 3
    while ( choice != 3 ) { 
@@ -22,6 +23,9 @@ int main( void )
             scanf( "%d", &item );
             insert( &startPtr, item ); // insert item in list
             printList( startPtr );
+
+            printlistR( startPtr );
+
             break;
          case 2: // delete an element
             // if list is not empty

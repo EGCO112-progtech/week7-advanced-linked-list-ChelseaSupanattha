@@ -2,6 +2,7 @@
 // self-referential structure
 struct Node {
    int data; // each listNode contains a character
+   struct Node *pPtr;
    struct Node *nextPtr; // pointer to next node
 }; // end structure listNode
 
@@ -14,6 +15,7 @@ int deletes( LLPtr *sPtr, int value );
 int isEmpty( LLPtr sPtr );
 void insert( LLPtr *sPtr, int value );
 void printList( LLPtr currentPtr );
+void printlistR(LLPtr currentPtr);
 void instructions( void );
 
 
@@ -52,16 +54,24 @@ void insert( LLPtr *sPtr, int value )
       // insert new node at beginning of list
       if ( previousPtr == NULL ) {
          newPtr->nextPtr = *sPtr;
-      
+         if(*sPtr!=NULL)
+         {
+            (*sPtr)->pPtr = newPtr;
+         }
          *sPtr = newPtr;
         
       } // end if
       else { // insert new node between previousPtr and currentPtr
          previousPtr->nextPtr = newPtr;
-   
-          
+         newPtr->pPtr = previousPtr;
+         
          newPtr->nextPtr = currentPtr;
- 
+
+         if(currentPtr!=NULL)
+         {
+            currentPtr->pPtr = newPtr;
+         }
+         
          
       } // end else
    } // end if
@@ -135,3 +145,25 @@ void printList( LLPtr currentPtr )
        
    } // end else
 } // end function printList
+
+void printlistR(LLPtr currentPtr)
+{
+   if(isEmpty(currentPtr))
+   {
+      printf("List is empty.\n");
+   }
+
+   else {
+      puts( "The list is:" );
+
+      // while not the end of the list
+      while ( currentPtr->nextPtr!= NULL ) {
+         printf( "%d --> ", currentPtr->data );
+         currentPtr = currentPtr->nextPtr;
+      } // end while
+
+      printf( "%d --> NULL\n",currentPtr->data );
+       
+       
+   } // end else
+}
