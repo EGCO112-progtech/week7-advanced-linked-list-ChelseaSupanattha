@@ -138,32 +138,25 @@ void printList( LLPtr currentPtr )
          currentPtr = currentPtr->nextPtr;
       } // end while
 
-      printf( "%d --> NULL\n",currentPtr->data );
-       
-
-     
-       
+      printf( "%d --> NULL\n",currentPtr->data );   
    } // end else
 } // end function printList
 
 void printlistR(LLPtr currentPtr)
 {
-   if(isEmpty(currentPtr))
-   {
-      printf("List is empty.\n");
+   if ( isEmpty( currentPtr ) ) {
+      puts( "List is empty.\n" );
    }
-
    else {
-      puts( "The list is:" );
+      while(currentPtr->nextPtr!=NULL){
+         currentPtr= currentPtr->nextPtr;
+      }
 
-      // while not the end of the list
-      while ( currentPtr->nextPtr!= NULL ) {
-         printf( "%d --> ", currentPtr->data );
-         currentPtr = currentPtr->nextPtr;
-      } // end while
-
-      printf( "%d --> NULL\n",currentPtr->data );
-       
-       
-   } // end else
+      puts("The reversed list is:");
+      while(currentPtr!=NULL){
+         printf("%d --> ", currentPtr->data);
+         currentPtr = currentPtr->pPtr;
+      }
+      printf("NULL\n");
+   }
 }
